@@ -1,11 +1,19 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import React from "react";
+import { View, Text, TouchableOpacity, Alert, Linking } from "react-native";
 import styles from "../style.js"; // Importando os estilos
 
 const HeartRateAlert = () => {
   // Função para lidar com o clique no botão de alerta
   const handleAlert = () => {
     Alert.alert("Esta funcionalidade ainda não está implementada.");
+  };
+
+  // Função para abrir o YouTube
+  const openYouTube = () => {
+    const url = "https://www.youtube.com/"; // Coloque aqui o link da playlist
+    Linking.openURL(url).catch((err) => 
+      Alert.alert("Erro", "Não foi possível abrir o YouTube.")
+    );
   };
 
   return (
@@ -22,7 +30,7 @@ const HeartRateAlert = () => {
         <TouchableOpacity onPress={handleAlert} style={styles.alertButton}>
           <Text style={styles.alertButtonText}>Escutar Playlist</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleAlert} style={styles.alertButton}>
+        <TouchableOpacity onPress={openYouTube} style={styles.alertButton}>
           <Text style={styles.alertButtonText}>Participar de uma Imersão</Text>
         </TouchableOpacity>
       </View>

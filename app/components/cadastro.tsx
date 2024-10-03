@@ -1,15 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 const CadastroScreen = () => {
   const [nome, setNome] = useState('');
   const [dataNascimento, setDataNascimento] = useState('');
-  const [etnia, setEtnia] = useState('');
-  const [curso, setCurso] = useState('');
+  const [etnia, setEtnia] = useState(null); // Valor inicial null
+  const [curso, setCurso] = useState(null); // Valor inicial null
   const [cidade, setCidade] = useState('');
   const [email, setEmail] = useState('');
   const [contatoEmergencia, setContatoEmergencia] = useState('');
+
+  const [openEtnia, setOpenEtnia] = useState(false);
+  const [etniaItems, setEtniaItems] = useState([
+    { label: 'Preto', value: 'preto' },
+    { label: 'Pardo', value: 'pardo' },
+    { label: 'Branco', value: 'branco' },
+    { label: 'Indígena', value: 'indigena' },
+    { label: 'Amarelo', value: 'amarelo' }
+  ]);
+
+  const [openCurso, setOpenCurso] = useState(false);
+  const [cursoItems, setCursoItems] = useState([
+    { label: '1º Informática', value: '1info' },
+    { label: '2º Informática', value: '2info' },
+    { label: '3º Informática', value: '3info' },
+    { label: '1º Mecânica', value: '1mec' },
+    { label: '2º Mecânica', value: '2mec' },
+    { label: '3º Mecânica', value: '3mec' },
+    { label: '1º Eletroeletrônica', value: '1ele' },
+    { label: '2º Eletroeletrônica', value: '2ele' },
+    { label: '3º Eletroeletrônica', value: '3ele' }
+  ]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -35,35 +58,31 @@ const CadastroScreen = () => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Etnia:</Text>
-        <RNPickerSelect
-          onValueChange={(value) => setEtnia(value)}
-          items={[
-            { label: 'Preto', value: 'preto' },
-            { label: 'Pardo', value: 'pardo' },
-            { label: 'Branco', value: 'branco' },
-            { label: 'Indígena', value: 'indigena' },
-            { label: 'Amarelo', value: 'amarelo' }
-          ]}
-          style={pickerSelectStyles}
+        <DropDownPicker
+          open={openEtnia}
+          value={etnia}
+          items={etniaItems}
+          setOpen={setOpenEtnia}
+          setValue={setEtnia}
+          setItems={setEtniaItems}
+          placeholder="Selecione sua etnia"
+          style={styles.dropdown}
+          dropDownContainerStyle={styles.dropdownContainer}
         />
       </View>
 
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Curso:</Text>
-        <RNPickerSelect
-          onValueChange={(value) => setCurso(value)}
-          items={[
-            { label: '1º Informática', value: '1info' },
-            { label: '2º Informática', value: '2info' },
-            { label: '3º Informática', value: '3info' },
-            { label: '1º Mecânica', value: '1mec' },
-            { label: '2º Mecânica', value: '2mec' },
-            { label: '3º Mecânica', value: '3mec' },
-            { label: '1º Eletroeletrônica', value: '1ele' },
-            { label: '2º Eletroeletrônica', value: '2ele' },
-            { label: '3º Eletroeletrônica', value: '3ele' }
-          ]}
-          style={pickerSelectStyles}
+        <DropDownPicker
+          open={openCurso}
+          value={curso}
+          items={cursoItems}
+          setOpen={setOpenCurso}
+          setValue={setCurso}
+          setItems={setCursoItems}
+          placeholder="Selecione seu curso"
+          style={styles.dropdown}
+          dropDownContainerStyle={styles.dropdownContainer}
         />
       </View>
 
@@ -129,6 +148,15 @@ const styles = StyleSheet.create({
     height: 40,
     paddingHorizontal: 10,
   },
+  dropdown: {
+    backgroundColor: '#d3b3e8',
+    borderColor: 'gray',
+    borderRadius: 10,
+  },
+  dropdownContainer: {
+    backgroundColor: '#d3b3e8',
+    borderColor: 'gray',
+  },
   button: {
     backgroundColor: '#3b0086',
     paddingVertical: 15,
@@ -140,31 +168,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#FFF',
     fontWeight: 'bold',
-  },
-});
-
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 10,
-    color: 'black',
-    backgroundColor: '#d3b3e8',
-    paddingRight: 30, // to ensure the text is never behind the icon
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 10,
-    color: 'black',
-    backgroundColor: '#d3b3e8',
-    paddingRight: 30, // to ensure the text is never behind the icon
   },
 });
 

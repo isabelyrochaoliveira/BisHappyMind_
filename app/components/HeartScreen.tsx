@@ -6,9 +6,9 @@ import {
   View,
 } from "react-native";
 import DeviceModal from "./DeviceConnectionModal";
-import useBLE from "../useBLE.ts";
-import HeartRateAlert from "./HeartRateAlert"; // Importando o alerta
-import styles from "../style.js"; // Importando os estilos
+import useBLE from '../../useBLE';
+import HeartRateAlert from "./HeartRateAlert"; 
+import styles from "../style.js"; 
 
 const MainApp = () => {
   const {
