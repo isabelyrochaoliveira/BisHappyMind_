@@ -11,6 +11,8 @@ const HeartRateAlert = () => {
     Linking.openURL(
       "https://open.spotify.com/playlist/3ccJAYoyLr9GxU3KJZ5LDp?si=8bCTRSvlSfCBkvBZtFZBaw&pi=8Vq4FPypQ-CRR&nd=1&dlsi=d99f0bf6edcb4162"
     );
+
+    navigate("formScreen");
   };
 
   const goVirtualRealityVideo = () => {

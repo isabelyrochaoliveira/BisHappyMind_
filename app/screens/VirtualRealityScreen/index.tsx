@@ -21,7 +21,7 @@ const VirtualRealityScreen = () => {
 
   return (
     <View style={styles.container}>
-      <YoutubeIframe videoId="eKumVFvGHFA" height={VIDEO_HEIGHT} />
+      <YoutubeIframe videoId="2v9PM5F-GVY" height={VIDEO_HEIGHT} />
 
       <Button
         title="Voltar"

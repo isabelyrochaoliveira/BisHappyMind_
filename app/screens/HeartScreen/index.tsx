@@ -36,7 +36,7 @@ const HeartScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       {heartRate > 100 ? (
-        <HeartRateAlert /> // Chama o alerta separado
+        <HeartRateAlert />
       ) : (
         <View style={styles.heartRateTitleWrapper}>
           {connectedDevice ? (

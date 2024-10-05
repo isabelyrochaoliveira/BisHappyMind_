@@ -8,7 +8,7 @@ import styles from "./style";
 
 interface ButtonProps {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   isLoading?: boolean;
   disabled?: boolean;
 }

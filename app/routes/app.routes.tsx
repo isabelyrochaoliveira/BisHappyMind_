@@ -4,10 +4,12 @@ import {
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 import VirtualRealityScreen from "../screens/VirtualRealityScreen";
+import FormScreen from "../screens/FormScreen";
 
 type AppRoutes = {
   heartScreen: undefined;
   virtualRealityScreen: undefined;
+  formScreen: undefined;
 };
 
 export type AppNavigatorRoutesProps = NativeStackNavigationProp<AppRoutes>;
@@ -20,6 +22,8 @@ export function AppRoutes() {
       <Screen name="heartScreen" component={HeartScreen} />
 
       <Screen name="virtualRealityScreen" component={VirtualRealityScreen} />
+
+      <Screen name="formScreen" component={FormScreen} />
     </Navigator>
   );
 }
