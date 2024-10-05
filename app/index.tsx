@@ -1,9 +1,10 @@
-import { Text, View } from "react-native";
-import CadastroScreen from "./components/cadastro";
-import MainApp from "./components/HeartScreen";
+import { AuthContextProvider } from "./contexts/AuthContext";
+import { Routes } from "./routes";
 
 export default function Index() {
   return (
-    <CadastroScreen />
+    <AuthContextProvider>
+      <Routes />
+    </AuthContextProvider>
   );
 }

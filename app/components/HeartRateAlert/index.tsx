@@ -1,19 +1,24 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Alert, Linking } from "react-native";
-import styles from "../style.js"; // Importando os estilos
+import { View, Text, TouchableOpacity, Linking } from "react-native";
+import styles from "./style";
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigatorRoutesProps } from "@/app/routes/app.routes";
 
 const HeartRateAlert = () => {
-  // Função para lidar com o clique no botão de alerta
+  const { navigate } = useNavigation<AppNavigatorRoutesProps>();
+
   const handleAlert = () => {
-    Alert.alert("Esta funcionalidade ainda não está implementada.");
+    Linking.openURL(
+      "https://open.spotify.com/playlist/3ccJAYoyLr9GxU3KJZ5LDp?si=8bCTRSvlSfCBkvBZtFZBaw&pi=8Vq4FPypQ-CRR&nd=1&dlsi=d99f0bf6edcb4162"
+    );
   };
 
-  // Função para abrir o YouTube
-  const openYouTube = () => {
-    const url = "https://www.youtube.com/"; // Coloque aqui o link da playlist
-    Linking.openURL(url).catch((err) => 
-      Alert.alert("Erro", "Não foi possível abrir o YouTube.")
-    );
+  const goVirtualRealityVideo = () => {
+    navigate("virtualRealityScreen");
+  };
+
+  const goBack = () => {
+    navigate("heartScreen");
   };
 
   return (
@@ -30,11 +35,14 @@ const HeartRateAlert = () => {
         <TouchableOpacity onPress={handleAlert} style={styles.alertButton}>
           <Text style={styles.alertButtonText}>Escutar Playlist</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={openYouTube} style={styles.alertButton}>
+        <TouchableOpacity
+          onPress={goVirtualRealityVideo}
+          style={styles.alertButton}
+        >
           <Text style={styles.alertButtonText}>Participar de uma Imersão</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={handleAlert} style={styles.alertButtonFullWidth}>
+      <TouchableOpacity onPress={goBack} style={styles.alertButtonFullWidth}>
         <Text style={styles.alertButtonText}>
           Estou apenas realizando uma atividade física.
         </Text>

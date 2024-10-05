@@ -1,16 +1,11 @@
+import useBLE from "@/app/hooks/useBLE";
 import React, { useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import DeviceModal from "./DeviceConnectionModal";
-import useBLE from '../../useBLE';
-import HeartRateAlert from "./HeartRateAlert"; 
-import styles from "../style.js"; 
+import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import styles from "./style";
+import HeartRateAlert from "@/app/components/HeartRateAlert";
+import DeviceModal from "@/app/components/DeviceConnectionModal";
 
-const MainApp = () => {
+const HeartScreen = () => {
   const {
     requestPermissions,
     scanForPeripherals,
@@ -74,4 +69,4 @@ const MainApp = () => {
   );
 };
 
-export default MainApp;
+export default HeartScreen;
