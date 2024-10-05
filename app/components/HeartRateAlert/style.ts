@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2", // Cor de fundo padrão
+    backgroundColor: "#f2f2f2",
   },
   heartRateTitleWrapper: {
     flex: 1,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#D9B3FF", // Light purple background
+    backgroundColor: "#D9B3FF",
     padding: 20,
     borderRadius: 20,
     margin: 20,
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   alertTitle: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "#000000", // Black text
+    color: "#000000",
     marginBottom: 10,
   },
   alertMessage: {
@@ -95,27 +95,26 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  // Estilos adicionados para os botões "Imersão" e "Escutar Playlist"
   buttonWrapper: {
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 20,
-    paddingHorizontal: 20, // Para espaçamento lateral
+    paddingHorizontal: 20,
   },
   secondaryButton: {
-    backgroundColor: "#b388ff", // Cor de fundo similar ao roxo claro
+    backgroundColor: "#b388ff",
     padding: 15,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
-    width: "40%", // Define o tamanho do botão
+    width: "40%",
     justifyContent: "center",
     alignItems: "center",
   },
   secondaryButtonText: {
-    color: "#000", // Cor preta para o texto
+    color: "#000",
     fontSize: 18,
     fontWeight: "bold",
   },
