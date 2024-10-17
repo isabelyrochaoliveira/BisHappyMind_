@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f2f2f2",
+    backgroundColor: "#e0aaff",
   },
   heartRateTitleWrapper: {
     flex: 1,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   ctaButton: {
-    backgroundColor: "#FF6060",
+    backgroundColor: "#A020F0",
     justifyContent: "center",
     alignItems: "center",
     height: 50,

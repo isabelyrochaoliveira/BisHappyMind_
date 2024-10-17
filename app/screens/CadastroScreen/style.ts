@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flexGrow: 1,
-      backgroundColor: "#A020F0",
+      backgroundColor: "#e0aaff",
       justifyContent: "center",
       padding: 20,
     },
@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
       fontSize: 32,
       fontWeight: "bold",
       textAlign: "center",
-      color: "#000",
+      color: "#10002b",
       marginBottom: 30,
     },
     inputContainer: {
@@ -19,26 +19,26 @@ const styles = StyleSheet.create({
     },
     label: {
       fontSize: 18,
-      color: "#000",
+      color: "#10002b",
       marginBottom: 5,
     },
     input: {
-      backgroundColor: "#d3b3e8",
+      backgroundColor: "#000",
       borderRadius: 10,
       height: 40,
       paddingHorizontal: 10,
     },
     dropdown: {
-      backgroundColor: "#d3b3e8",
-      borderColor: "gray",
+      backgroundColor: "#9d4edd",
+      borderColor: "#240046",
       borderRadius: 10,
     },
     dropdownContainer: {
-      backgroundColor: "#d3b3e8",
-      borderColor: "gray",
+      backgroundColor: "#9d4edd",
+      borderColor: "#240046",
     },
     button: {
-      backgroundColor: "#3b0086",
+      backgroundColor: "#A020F0",
       paddingVertical: 15,
       borderRadius: 10,
       marginTop: 20,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     buttonText: {
       textAlign: "center",
       fontSize: 20,
-      color: "#FFF",
+      color: "#fff",
       fontWeight: "bold",
     },
   });

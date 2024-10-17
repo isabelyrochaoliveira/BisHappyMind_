@@ -41,12 +41,12 @@ const HeartScreen = () => {
         <View style={styles.heartRateTitleWrapper}>
           {connectedDevice ? (
             <>
-              <Text style={styles.heartRateTitleText}>Your Heart Rate Is:</Text>
+              <Text style={styles.heartRateTitleText}>Sua frequência cardíaca é:</Text>
               <Text style={styles.heartRateText}>{heartRate} bpm</Text>
             </>
           ) : (
             <Text style={styles.heartRateTitleText}>
-              Please Connect to a Heart Rate Monitor
+              Conecte-se a um monitor de frequência cardíaca
             </Text>
           )}
         </View>
@@ -56,7 +56,7 @@ const HeartScreen = () => {
         style={styles.ctaButton}
       >
         <Text style={styles.ctaButtonText}>
-          {connectedDevice ? "Disconnect" : "Connect"}
+          {connectedDevice ? "Desconectar" : "Conectar"}
         </Text>
       </TouchableOpacity>
       <DeviceModal
