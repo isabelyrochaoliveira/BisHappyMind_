@@ -1,5 +1,5 @@
 import useBLE from "@/app/hooks/useBLE";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import styles from "./style";
 import HeartRateAlert from "@/app/components/HeartRateAlert";
@@ -17,6 +17,33 @@ const HeartScreen = () => {
   } = useBLE();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const postHeartRate = async () => {
+    try {
+      if (heartRate) {
+        const response = await fetch("https://www.seusite.com.br/api/batimento", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            heartRate: heartRate,
+            timestamp: new Date().toISOString(),
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Erro ao enviar batimento: ${response.status}`);
+        }
+
+        const jsonResponse = await response.json();
+        console.log("Batimento enviado com sucesso:", jsonResponse);
+      }
+    } catch (error) {
+      console.error("Erro ao enviar batimento:", error);
+    }
+  };
+
   const scanForDevices = async () => {
     const isPermissionsEnabled = await requestPermissions();
     if (isPermissionsEnabled) {
@@ -32,6 +59,16 @@ const HeartScreen = () => {
     scanForDevices();
     setIsModalVisible(true);
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (connectedDevice && heartRate) {
+        postHeartRate();
+      }
+    }, 600000);
+
+    return () => clearInterval(intervalId);
+  }, [connectedDevice, heartRate]);
 
   return (
     <SafeAreaView style={styles.container}>

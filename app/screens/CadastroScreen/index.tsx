@@ -1,18 +1,16 @@
-import React from "react";
-import { useState } from "react";
-import { View, Text, ScrollView } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
-import styles from "./style";
-import { useAuth } from "@/app/hooks/useAuth";
-import Input from "@/app/components/Input";
-import * as yup from "yup";
-import { Controller, useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { ScrollView, Text } from "react-native";
+import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+import Input from "@/app/components/Input";
 import Button from "@/app/components/Button";
+import Select from "@/app/components/Select";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigatorRoutesProps } from "@/app/routes/app.routes";
-import { Picker } from "@react-native-picker/picker";
-import Select from "@/app/components/Select";
+
+import styles from "./style";
 
 type FormDataProps = {
   nome: string;
@@ -31,7 +29,9 @@ const CadastroScreenSchema = yup.object({
   curso: yup.string().required("Selecione o curso."),
   cidade: yup.string().required("Informe a cidade."),
   email: yup.string().required("Informe o e-mail").email("E-mail inválido."),
-  contatoEmergencia: yup.string().required("Informe o contato de emergência."),
+  contatoEmergencia: yup
+    .string()
+    .required("Informe o contato de emergência."),
 });
 
 const CadastroScreen = () => {
@@ -45,41 +45,36 @@ const CadastroScreen = () => {
     resolver: yupResolver(CadastroScreenSchema),
   });
 
-  const { createUser } = useAuth();
-  const [openEtnia, setOpenEtnia] = useState(false);
-  const [etniaItems, setEtniaItems] = useState([
-    { label: "Preto", value: "preto" },
-    { label: "Pardo", value: "pardo" },
-    { label: "Branco", value: "branco" },
-    { label: "Indígena", value: "indigena" },
-    { label: "Amarelo", value: "amarelo" },
-  ]);
-
-  const [openCurso, setOpenCurso] = useState(false);
-  const [selectedCurso, setSelectedCurso] = useState([
-    { label: "1º Informática", value: "1info" },
-    { label: "2º Informática", value: "2info" },
-    { label: "3º Informática", value: "3info" },
-    { label: "1º Mecânica", value: "1mec" },
-    { label: "2º Mecânica", value: "2mec" },
-    { label: "3º Mecânica", value: "3mec" },
-    { label: "1º Eletroeletrônica", value: "1ele" },
-    { label: "2º Eletroeletrônica", value: "2ele" },
-    { label: "3º Eletroeletrônica", value: "3ele" },
-  ]);
-
   const [isLoading, setIsLoading] = useState(false);
 
+  // Método responsável pelo envio dos dados via API
   const storageUser = async (data: FormDataProps) => {
     try {
-      setIsLoading(true);
-      createUser(data);
+      setIsLoading(true); // Ativa o estado de carregamento
 
+      // Realiza a requisição POST para a API
+      const response = await fetch("https://www.seusite.com.br/api", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), // Envia os dados do formulário
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro na API: ${response.status}`);
+      }
+
+      const jsonResponse = await response.json(); // Converte a resposta para JSON
+      console.log("Resposta da API:", jsonResponse);
+
+      // Após sucesso, navega para a próxima tela
       navigate("heartScreen");
     } catch (error) {
-      console.log("Deu erro! >>>", error);
+      console.error("Erro ao cadastrar usuário:", error);
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Desativa o estado de carregamento
     }
   };
 
@@ -112,6 +107,7 @@ const CadastroScreen = () => {
           />
         )}
       />
+
       <Controller
         control={control}
         name="etnia"
@@ -197,8 +193,8 @@ const CadastroScreen = () => {
 
       <Button
         title="Cadastrar"
-        onPress={handleSubmit(storageUser)}
-        isLoading={isLoading}
+        onPress={handleSubmit(storageUser)} // Método chamado no clique do botão
+        isLoading={isLoading} // Indica carregamento
       />
     </ScrollView>
   );
