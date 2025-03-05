@@ -53,7 +53,7 @@ const CadastroScreen = () => {
       setIsLoading(true); // Ativa o estado de carregamento
 
       // Realiza a requisição POST para a API
-      const response = await fetch("https://www.seusite.com.br/api", {
+      const response = await fetch("192.168.0.157:8081/aluno", {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -4,6 +4,55 @@ import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import styles from "./style";
 import HeartRateAlert from "@/app/components/HeartRateAlert";
 import DeviceModal from "@/app/components/DeviceConnectionModal";
+import SQLite from "react-native-sqlite-storage";
+
+// Função para abrir o banco de dados SQLite
+const openDatabase = () => {
+  const db = SQLite.openDatabase(
+    { name: "heartRate.db", location: "default" },
+    () => {},
+    (error: any) => {
+      console.error("Erro ao abrir o banco de dados SQLite:", error);
+    }
+  );
+  return db;
+};
+
+// Função para criar a tabela de batimentos cardíacos, se não existir
+const createTableIfNotExists = (db: SQLite.SQLiteDatabase) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      `CREATE TABLE IF NOT EXISTS heart_rate (id INTEGER PRIMARY KEY AUTOINCREMENT, bpm INTEGER, timestamp TEXT)`,
+      [],
+      () => {
+        console.log("Tabela de batimentos criada com sucesso.");
+      },
+      (error) => {
+        console.error("Erro ao criar a tabela de batimentos:", error);
+      }
+    );
+  });
+};
+
+// Função para salvar batimento cardíaco no banco de dados
+const saveHeartRateLocally = (bpm: number) => {
+  const db = openDatabase();
+  createTableIfNotExists(db);
+
+  const timestamp = new Date().toISOString();
+  db.transaction((tx) => {
+    tx.executeSql(
+      "INSERT INTO heart_rate (bpm, timestamp) VALUES (?, ?)",
+      [bpm, timestamp],
+      () => {
+        console.log(`Batimento de ${bpm} bpm salvo com sucesso.`);
+      },
+      (error) => {
+        console.error("Erro ao salvar batimento no banco de dados:", error);
+      }
+    );
+  });
+};
 
 const HeartScreen = () => {
   const {
@@ -63,9 +112,12 @@ const HeartScreen = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (connectedDevice && heartRate) {
-        postHeartRate();
+        if (heartRate > 50) {
+          saveHeartRateLocally(heartRate); // Salva no SQLite
+          postHeartRate(); // Envia para a API
+        }
       }
-    }, 600000);
+    }, 600000); // Intervalo de 10 minutos (600000ms)
 
     return () => clearInterval(intervalId);
   }, [connectedDevice, heartRate]);
