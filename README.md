@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # BisHappyMind
 Aplicação móvel que oferece recursos e atividades para ajudar adolescentes a gerenciar e reduzir a ansiedade, promovendo bem-estar mental através de técnicas comprovadas.
 
