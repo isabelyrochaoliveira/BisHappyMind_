@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BisHappyMind
 Aplicação móvel que oferece recursos e atividades para ajudar adolescentes a gerenciar e reduzir a ansiedade, promovendo bem-estar mental através de técnicas comprovadas.
 
@@ -27,3 +28,6 @@ Aplicação móvel que oferece recursos e atividades para ajudar adolescentes a 
 4. Inicie o aplicativo:
    ````bash
    npx expo start
+=======
+# BisHappyMind_
+>>>>>>> 6570579aee27ac136a597f231e48ee695261328f
